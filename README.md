@@ -1,8 +1,10 @@
 # VANIR
 
-NextFlow pipeline for Virus Variant calling and de novo Assembly of Nanopore and Illumina Reads
+NextFlow pipeline for Virus Variant calling and de novo Assembly of Nanopore and Illumina Reads.
 
------------------------------------------------------------------------------------------------
+If any issue raises, please do not hesitate to open an issue in this repository or to contact me at `joan.marti.carreras@gmail.com`
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
 The aim of this pipeline is to accuratley base-call and QC read information and _de novo_ assemble long-read data from Oxford Nanopore Technologies (ONT) reads to yield a complete dsDNA viral genome. The target genome is later corrected using multiple algorithms (Racon and Medaka) and a final polishing using a higher accuracy read data set from Illumina.
@@ -14,6 +16,9 @@ The pipeline is writen in NextFlow pipeline manager. This framework allow users 
 Additionally, all software has been bundled in a Singularity container, containing its own operating system (Ubuntu 16.04) and all libraries and programs needed to run the pipeline. Singularity makes this pipeline highly transportable, as can be run it creates its own environemnt; convenient, as everything has been pre-bundled for direct user usage; and reproducible, as libraries and programs are independent from general installation and will run always on the same manner.
 
 This pipeline is partially GPU-enabled, concerning maninly ONT basecalling and ONT read correction with Medaka.
+
+This pipeline is a working in progress on v1.0.
+
 
 ## Installation
 
@@ -55,7 +60,7 @@ vagrant up
 vagrant ssh
 ```
 
-### Windows:
+### Windows
 
 First install [Git](https://git-for-windows.github.io/), [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html) and [Vagrant Manager](https://www.vagrantup.com/downloads.html).
 
@@ -85,10 +90,29 @@ sudo cp main.nf VANIR/nextflow/
 ## Options
 There are 2 sets of options, one comming from VANIR pipeline itself and one from the NextFlow manager:
 
-```                                                                                                                                                                                                                                                                                                                                                                                                      Mandatory options:                                                                                                                                                                                             Folder to raw fast5 reads [PATH]:                                          --fast5                                                                                                                     Illumina 1st pair-end reads (can be .gz) [FILE]:                           --read1                                                                                                                     Illumina 2nd pair-end reads (can be .gz) [FILE]:                           --read2                                                                                                                     Illumina adapters [FILE]:                                                  --illumina_adapters                                                                                                         Sample prefix [FILE]:                                                      --prefix                                                                                                                    Reference genome [FILE]:                                                   --reference                                                                                                                 Sequencing contaminants [FILE]:                                            --contaminants                                                                                                              Number of CPUs asked [NUMERIC]:                                            --cpu                                                                                                                       GPU-enabled ('true' enabled // 'false' disabled) [Boolean]:                --gpu                                                                                                                       Guppy-basecalling mode ('precise' for hac // 'fast' for fast) [Boolean]:   --guppy_algorithm                                                                                                           Expected genome size (STRING, eg 35k, 8g or 250m):                         --genome_size                                                                                                                                                                                                                                                                                                                  
+## VANIR
+```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+Folder to raw fast5 reads [PATH]:                                          --fast5                                                                                                                     
+Illumina 1st pair-end reads (can be .gz) [FILE]:                           --read1                                                                                                                     
+Illumina 2nd pair-end reads (can be .gz) [FILE]:                           --read2                                                                                                                     
+Illumina adapters [FILE]:                                                  --illumina_adapters                                                                                                         
+Sample prefix [FILE]:                                                      --prefix                                                                                                                    
+Reference genome [FILE]:                                                   --reference                                                                                                                 
+Sequencing contaminants [FILE]:                                            --contaminants                                                                                                              
+Number of CPUs asked [NUMERIC]:                                            --cpu                                                                                                                       
+GPU-enabled ('true' enabled // 'false' disabled) [Boolean]:                --gpu                                                                                                                       
+Guppy-basecalling mode ('precise' for hac // 'fast' for fast) [Boolean]:   --guppy_algorithm                                                                                                          
+Expected genome size (STRING, eg 35k, 8g or 250m):                         --genome_size 
+
 ```
-```
-NextFlow options [OPTIONAL]:                                                                                                                                                                               Produce an html report with useful metrics of the pipeline [FILE]          -with-report                                                                                                                Produce a tabular file with tracings of each processes [FILE]              -with-trace                                                                                                                 Produce an html graphic of all process executed [FILE]                     -with-timeline                                                                                                              Produce a graph-image (.dot/.html/.pdf/.png/.svg) of the pipeline [FILE]   -with-dag       
+## NextFlow manager
+
+```                                                                                                                                                                                                                                                                                                                                        
+Produce an html report with useful metrics of the pipeline [FILE]          -with-report                                                                                                                                                                                                                                                                                                                                                                                                                                            
+Produce a tabular file with tracings of each processes [FILE]              -with-trace                                                                                                                                                                                                                                                                                       
+Produce an html graphic of all process executed [FILE]                     -with-timeline                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+Produce a graph-image (.dot/.html/.pdf/.png/.svg) of the pipeline [FILE]   -with-dag                                                                                                                                                                                
+
 ```
 ## Run
 
@@ -96,5 +120,6 @@ To run this pipeline, run on terminal:
 
 ```                                                                                                                                                                                                                                                                                                                                                               
 sudo singularity shell -B <BIND-PATH-DATA> --nv --writable VANIR
-nextflow run nextflow/VANIR/ OPTIONS 
+nextflow run nextflow/main.nf OPTIONS 
 ```
+Option `-B` or bind, can be used as many times needed, specifying different paths for data to be mounted in specific locations in the Singularity container. Option `--nv` is mandatory for GPU computing, and `--writable` options guarantees at this first release of the pipeline to write within the image. Later results can be exported.
