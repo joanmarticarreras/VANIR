@@ -76,8 +76,8 @@ After installing Singularity, VANIR image must be build from recepie or download
 To build from recepie please follow:
 
 ```
-git clone XXXX
-cd XX
+git clone https://github.com/joanmarticarreras/VANIR.git
+cd VANIR/
 sudo singularity build --writable VANIR singularity-recepie/VANIR-singularity-recepie.txt
 sudo cp main.nf VANIR/nextflow/
 ```

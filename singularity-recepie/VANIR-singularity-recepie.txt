@@ -1,0 +1,190 @@
+Bootstrap: docker
+From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+
+%environment
+  # use bash as default shell
+  SHELL=/bin/bash
+
+  # add CUDA paths
+  CPATH="/usr/local/cuda-9.0/include:$CPATH"
+  PATH="/usr/local/cuda-9.0/bin:$PATH"
+  LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:$PATH"
+  CUDA_HOME="/usr/local/cuda-9.0:$PATH"
+  export LC_ALL=C
+  export PATH LD_LIBRARY_PATH CPATH CUDA_HOME
+
+%setup
+  # runs on host
+  # the path to the image is $SINGULARITY_ROOTFS
+  # autofs bug path = /apps ????? # solve symbolic links?
+
+%post
+  # post-setup script
+  mkdir -p /usr/lib/nvidia
+  # load environment variables
+  . /environment
+
+  # use bash as default shell
+  echo "\n #Using bash as default shell \n" >> /environment
+  echo 'SHELL=/bin/bash' >> /environment
+
+  echo "export LC_ALL=C"
+  # make environment file executable
+  chmod +x /environment
+
+  # default mount paths
+  mkdir -p /scratch /nvidia
+
+  # Add CUDA paths
+#  echo "\n #Cuda paths \n" >> /environment
+#  echo 'export CPATH="/usr/local/cuda-9.0/include:$CPATH"' >> /environment
+#  echo 'export PATH="/usr/local/cuda-9.0/bin:$PATH"' >> /environment
+#  echo 'export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"' >> /environment
+#  echo 'export CUDA_HOME="/usr/local/cuda-9.0"' >> /environment
+
+  # Update and install general purpose tools
+  apt-get update
+  apt-get install -y tar wget git vim build-essential make cmake nano less curl apt-transport-https software-properties-common
+
+  # Add extended Ubuntu repositories
+  add-apt-repository universe
+  add-apt-repository restricted
+  add-apt-repository ppa:graphics-drivers/ppa
+  add-apt-repository ppa:canonical-kernel-team/ppa
+  add-apt-repository ppa:graphics-drivers/ppa
+  apt-get update -y
+
+  # Install remaining NVIDIA libraries
+  apt-get install nvidia-384 -y --allow-unauthenticated
+  apt-get install libboost-log1.58.0 -y --allow-unauthenticated
+  apt-get install nvidia-387 -y --allow-unauthenticated
+  apt-get install libcuda1-384 -y --allow-unauthenticated
+  apt-get install nvidia-410 -y --allow-unauthenticated
+  apt-get install nvidia-410=410.48-0ubuntu1 -y --allow-unauthenticated --allow-downgrades
+  apt-get install libcuda1-410=410.48-0ubuntu1 -y --allow-unauthenticated
+
+  # Install JAVA libraries
+  apt install default-jre -y --allow-unauthenticated
+  apt install default-jdk -y --allow-unauthenticated
+
+  # Install workflow programs
+  mkdir -p /binaries
+  cd /binaries
+  # Install Guppy from Oxford Nanopore Technologies
+  wget https://europe.oxfordnanoportal.com/software/analysis/ont-guppy_3.0.3_linux64.tar.gz --no-check-certificate
+  tar -vxzf ont-guppy_3.0.3_linux64.tar.gz
+  ln -s /binaries/ont-guppy/bin/guppy_basecaller /usr/local/bin/guppy_basecaller
+  # Install NextFlow
+  curl -L "https://www.nextflow.io/releases/v19.04.1/nextflow?a=install" -o /binaries/nextflow
+  chmod u+x /binaries/nextflow
+  ln -s /binaries/nextflow /usr/local/bin/nextflow
+  # Install trimming tools
+  curl -L "https://codeload.github.com/rrwick/Porechop/tar.gz/v0.2.4" -o /binaries/porechop-v0.2.4.tar.gz
+  tar xvzf /binaries/porechop-v0.2.4.tar.gz
+  cd Porechop-0.2.4/
+  make
+  cd ..
+  ln -s /binaries/Porechop-0.2.4/porechop-runner.py /usr/local/bin/porechop
+  curl -L "https://netix.dl.sourceforge.net/project/bbmap/BBMap_38.50b.tar.gz" > /binaries/BBMap_38.50b.tar.gz
+  tar -xvzf /binaries/BBMap_38.50b.tar.gz
+  ln -s /binaries/bbmap/bbduk.sh /usr/local/bin/bbduk
+  # Install assembler
+  curl -L "https://github.com/marbl/canu/releases/download/v1.8/canu-1.8.Linux-amd64.tar.xz" -o /binaries/canu-v1.8.Linux-amd64.tar.xz
+  tar xJf /binaries/canu-v1.8.Linux-amd64.tar.xz
+  ln -s /binaries/canu-1.8/*/bin/canu /usr/local/bin/canu
+  # Blast
+  curl -L "ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.9.0/ncbi-blast-2.9.0+-x64-linux.tar.gz" -o /binaries/ncbi-blast-2.9.0+-x64-linux.tar.gz
+  tar xvzf /binaries/ncbi-blast-2.9.0+-x64-linux.tar.gz
+  ln -s /binaries/ncbi-blast-2.9.0+/bin/* /usr/local/bin/
+  # Install mappers
+  curl -L "https://github.com/lh3/minimap2/releases/download/v2.17/minimap2-2.17_x64-linux.tar.bz2" -o /binaries/minimap2-2.17_x64-linux.tar.bz2
+  tar -jxvf /binaries/minimap2-2.17_x64-linux.tar.bz2
+  ln -s /binaries/minimap2-2.17_x64-linux/minimap2 /usr/local/bin/minimap2
+  apt-get install zlib1g-dev -y
+  curl -L "https://github.com/lh3/bwa/releases/download/v0.7.17/bwa-0.7.17.tar.bz2" -o /binaries/bwa-0.7.17.tar.bz2
+  tar -jxvf /binaries/bwa-0.7.17.tar.bz2
+  cd bwa-0.7.17
+  make
+  cd ..
+  ln -s /binaries/bwa-0.7.17/bwa /usr/local/bin/bwa
+  # Install SAMtools
+  apt-get update
+  apt-get install autoconf automake make gcc perl zlib1g-dev libbz2-dev liblzma-dev libcurl4-gnutls-dev libssl-dev libncurses5-dev  -y
+  curl -L "https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2" -o /binaries/samtools-1.9.tar.bz2
+  curl -L "https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2" -o /binaries/bcftools-1.9.tar.bz2
+  curl -L "https://github.com/samtools/htslib/releases/download/1.9/htslib-1.9.tar.bz2" -o /binaries/htslib-1.9.tar.bz2
+  tar jxf /binaries/samtools-1.9.tar.bz2
+  tar jxf /binaries/bcftools-1.9.tar.bz2
+  tar jxf /binaries/htslib-1.9.tar.bz2
+  cd samtools-1.9
+  ./configure --prefix=/binaries/samtools-1.9/
+  make
+  make install
+  cd ..
+  ln -s /binaries/samtools-1.9/samtools /usr/local/bin/samtools
+  cd bcftools-1.9
+  ./configure --prefix=/binaries/bcftools-1.9/
+  make
+  make install
+  cd ..
+  ln -s /binaries/bcftools-1.9/bcftools /usr/local/bin/bcftools
+  cd htslib-1.9
+  ./configure --prefix=/binaries/htslib-1.9/
+  make
+  make install
+  cd ..
+  ln -s /binaries/htslib-1.9/htsfile /usr/local/bin/htsfile 
+  ln -s /binaries/htslib-1.9/bgzip /usr/local/bin/bgzip
+  # Sequence manipulator
+  curl -L "https://codeload.github.com/lh3/seqtk/tar.gz/v1.3" -o /binaries/seqtk-v1.3.tar.gz
+  tar xvzf /binaries/seqtk-v1.3.tar.gz
+  cd /binaries/seqtk-1.3/
+  make
+  cd ../.. 
+  ln -s /binaries/seqtk-1.3/seqtk /usr/local/bin/seqtk
+  # Sequence polishers
+  curl -L "https://github.com/isovic/racon/releases/download/1.3.3/racon-v1.3.3.tar.gz" -o /binaries/racon-v1.3.3.tar.gz
+  tar xvzf /binaries/racon-v1.3.3.tar.gz
+  cd racon-v1.3.3/
+  mkdir build
+  cd build
+  cmake -DCMAKE_BUILD_TYPE=Release ..
+  make
+  cd ../..
+  ln -s /binaries/racon-v1.3.3/build/bin/racon /usr/local/bin/racon
+  curl -L "https://github.com/broadinstitute/pilon/releases/download/v1.23/pilon-1.23.jar" -o /binaries/pilon-1.23.jar
+  chmod a+x /binaries/pilon-1.23.jar
+  ln -s /binaries/pilon-1.23.jar /usr/local/bin/pilon.jar
+  apt-get install libffi-dev python3-all-dev python-virtualenv -y
+  curl -L "https://codeload.github.com/nanoporetech/medaka/tar.gz/v0.7.1" -o /binaries/medaka-0.7.1.tar.gz
+  cd /binaries
+  tar xvzf /binaries/medaka-0.7.1.tar.gz
+  cd /binaries/medaka-0.7.1/
+  sed -i 's/tensorflow/tensorflow-gpu/' requirements.txt
+  make install
+  ln -s /binaries/medaka-0.7.1/venv/bin/medaka* /usr/local/bin/
+  cd /binaries
+  # Install variant callers
+  curl -L "https://github.com/fritzsedlazeck/Sniffles/archive/1.0.11.tar.gz" -o /binaries/sniffles-1.0.11.tar.gz
+  tar xzvf /binaries/sniffles-1.0.11.tar.gz
+  cd Sniffles-1.0.11/
+  mkdir -p build/
+  cd build/
+  cmake ..
+  make
+  cd ../..
+  ln -s /binaries/Sniffles-1.0.11/bin/sniffles-core-1.0.11/sniffles /usr/local/bin/sniffles
+  curl -L "https://github.com/philres/ngmlr/releases/download/v0.2.7/ngmlr-0.2.7-linux-x86_64.tar.gz" -o /binaries/ngmlr-0.2.7-linux-x86_64.tar.gz
+  tar xvzf /binaries/ngmlr-0.2.7-linux-x86_64.tar.gz
+  ln -s /binaries/ngmlr-0.2.7/ngmlr /usr/local/bin/ngmlr
+  curl -L "https://github.com/CSB5/lofreq/raw/master/dist/lofreq_star-2.1.3.1_linux-x86-64.tgz" -o /binaries/lofreq_star-2.1.3.1_linux-x86-64.tar.gz
+  tar xvzf /binaries/lofreq_star-2.1.3.1_linux-x86-64.tar.gz
+  ln -s /binaries/lofreq_star-2.1.3.1/bin/lofreq /usr/local/bin/lofreq
+  ln -s /binaries/lofreq_star-2.1.3.1/bin/lofreq2_call_pparallel.py /usr/local/bin/lofreq2_call_pparallel
+%runscript
+  # executes with the singularity run command
+  # delete this section to use existing docker ENTRYPOINT command
+
+%test
+  # test that script is a success
+
