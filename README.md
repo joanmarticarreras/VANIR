@@ -1,6 +1,6 @@
 # VANIR
 
-NextFlow pipeline for Virus Variant calling and de novo Assembly of Nanopore and Illumina Reads.
+VANIR - NextFlow pipeline for Viral Variant calling and de novo Assembly of Nanopore and Illumina Reads for high-quality genomes
 
 If any issue raises, please do not hesitate to open an issue in this repository or to contact me at `joan.marti.carreras@gmail.com`
 
