@@ -28,7 +28,7 @@ Only the Singulairy image needs to be installed. For this first install Singular
 Open the terminal and type the following:
 
 ```
-VERSION=2.5.2
+VERSION=3.5.2
 wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
 tar xvf singularity-$VERSION.tar.gz
 cd singularity-$VERSION
@@ -55,7 +55,7 @@ Download Singularity from [here](https://app.vagrantup.com/singularityware/boxes
 mkdir singularity-vm
 cd singularity-vm
 vagrant destroy
-vagrant init singularityware/singularity-2.4
+vagrant init singularityware/singularity-3.5.2
 vagrant up
 vagrant ssh
 ```
@@ -70,7 +70,7 @@ Then install [Singularity](https://app.vagrantup.com/singularityware/boxes/singu
 mkdir singularity-vm
 cd singularity-vm
 vagrant destroy
-vagrant init singularityware/singularity-2.4
+vagrant init singularityware/singularity-3.5.2
 vagrant up
 vagrant ssh
 
