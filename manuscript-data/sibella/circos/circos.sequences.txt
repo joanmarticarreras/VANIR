@@ -1,0 +1,5 @@
+chr - seq1 NC_006273.2 0 235646 green_a4
+chr - seq2 Merlin_VAIR_medaka_pilon 0 235661 green_a4
+chr - seq3 DABE_VAIR_medaka_pilon 0 219351 green_a4
+chr - seq4 pseudo_used_C_006273.2 0 221608 green_a4
+chr - seq5 SOMA_VAIR_medaka_pilon 0 227449 green_a4
