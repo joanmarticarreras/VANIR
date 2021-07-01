@@ -1,0 +1,88 @@
+---
+title: "VANIR"
+author: "Joan Martí-Carreras"
+date: "6/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r libraries}
+library(tidyverse)
+library(ggsci)
+library(cowplot)
+
+VANIR_resources <- read_csv(file = "resources.csv")
+```
+
+## Resources
+
+
+```{r plot, echo=FALSE}
+
+cpu <- ggplot(VANIR_resources) +
+  geom_boxplot(aes(x=cpu,y=factor(order),fill=process)) +
+  scale_y_discrete(breaks=VANIR_resources$order,
+        labels=VANIR_resources$process, limits=rev) +
+  scale_fill_d3(palette = c("category20"), alpha = 1,) +
+  labs(y="")+
+  theme_minimal()
+
+realtime <- ggplot(VANIR_resources) +
+  geom_boxplot(aes(x=realtime,y=factor(order),fill=process)) +
+  scale_y_discrete(breaks=VANIR_resources$order,
+        labels=VANIR_resources$process, limits=rev) +
+  scale_fill_d3(palette = c("category20"), alpha = 1,) +
+  labs(y="")+
+  theme(legend.position = "none")+
+  theme_minimal()
+
+mem <- ggplot(VANIR_resources) +
+  geom_boxplot(aes(x=mem,y=factor(order),fill=process)) +
+  scale_y_discrete(breaks=VANIR_resources$order,
+        labels=VANIR_resources$process, limits=rev) +
+  scale_fill_d3(palette = c("category20"), alpha = 1,) +
+  labs(y="")+
+  theme(legend.position = "none")+
+  theme_minimal()
+
+read <- ggplot(VANIR_resources) +
+  geom_boxplot(aes(x=read_bytes,y=factor(order),fill=process)) +
+  scale_y_discrete(breaks=VANIR_resources$order,
+        labels=VANIR_resources$process, limits=rev) +
+  scale_fill_d3(palette = c("category20"), alpha = 1,) +
+  labs(y="")+
+  theme(legend.position = "none")+
+  theme_minimal()
+
+write <- ggplot(VANIR_resources) +
+  geom_boxplot(aes(x=write_bytes,y=factor(order),fill=process)) +
+  scale_y_discrete(breaks=VANIR_resources$order,
+        labels=VANIR_resources$process, limits=rev) +
+  scale_fill_d3(palette = c("category20"), alpha = 1,) +
+  labs(y="")+
+  theme(legend.position = "none")+
+  theme_minimal()
+
+legend <- cowplot::get_legend(write)
+
+plot_grid(cpu + theme(legend.position = "none"),
+          realtime + theme(legend.position = "none"),
+          mem + theme(legend.position = "none"),
+          read + theme(legend.position = "none"),
+          write + theme(legend.position = "none"),
+          legend)
+
+ggsave("benchmarking.svg",width = 15,height = 12)
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

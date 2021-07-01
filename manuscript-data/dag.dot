@@ -1,0 +1,402 @@
+digraph "dag" {
+p0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p13 [label="nanopore_basecalling"];
+p0 -> p13 [label="nanopore5Channel"];
+
+p1 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p25 [label="illumina_trim_bbduk"];
+p1 -> p25 [label="illumina1Channel"];
+
+p2 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p25 [label="illumina_trim_bbduk"];
+p2 -> p25 [label="illumina2Channel"];
+
+p3 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p25 [label="illumina_trim_bbduk"];
+p3 -> p25 [label="illuminaAdaptersChannel"];
+
+p4 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+p6 [label="genbank_decompose"];
+p4 -> p6 [label="referenceGenomeChannel"];
+
+p5 [shape=point,label="",fixedsize=true,width=0.1];
+p6 [label="genbank_decompose"];
+p5 -> p6 [label="prefix"];
+
+p6 [label="genbank_decompose"];
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p6 -> p7 [label="reference_fasta"];
+
+p6 [label="genbank_decompose"];
+p8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p6 -> p8 [label="gff"];
+
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p38 [label="filter_structure"];
+p7 -> p38 [label="referenceBLAST"];
+
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p58 [label="illumina_mapping_reference"];
+p7 -> p58 [label="referenceIlluminaMapping"];
+
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p64 [label="illumina_VC_reference"];
+p7 -> p64 [label="referenceIlluminaVC"];
+
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p72 [label="nanopore_mapping_reference"];
+p7 -> p72 [label="referenceNanoporeMapping"];
+
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p20 [label="nanopore_trim_filter_reads"];
+p7 -> p20 [label="referenceFilter"];
+
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p55 [label="genome_annotation"];
+p7 -> p55 [label="referenceAnnotation"];
+
+p7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p46 [label="nanopore_polishing_medaka"];
+p7 -> p46 [label="referenceMedaka"];
+
+p8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p38 [label="filter_structure"];
+p8 -> p38 [label="reference_gff"];
+
+p8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p55 [label="genome_annotation"];
+p8 -> p55 [label="transport_gff"];
+
+p9 [shape=point,label="",fixedsize=true,width=0.1];
+p13 [label="nanopore_basecalling"];
+p9 -> p13 [label="cpu"];
+
+p10 [shape=point,label="",fixedsize=true,width=0.1];
+p13 [label="nanopore_basecalling"];
+p10 -> p13 [label="gpu"];
+
+p11 [shape=point,label="",fixedsize=true,width=0.1];
+p13 [label="nanopore_basecalling"];
+p11 -> p13 [label="type"];
+
+p12 [shape=point,label="",fixedsize=true,width=0.1];
+p13 [label="nanopore_basecalling"];
+p12 -> p13 [label="prefix"];
+
+p13 [label="nanopore_basecalling"];
+p15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p13 -> p15 [label="nanoporeFastq"];
+
+p13 [label="nanopore_basecalling"];
+p14 [shape=point];
+p13 -> p14 [label="sequencingSummary"];
+
+p15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p17 [label="nanopore_QC_run_nanoplot"];
+p15 -> p17 [label="nanoporeQC"];
+
+p15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p20 [label="nanopore_trim_filter_reads"];
+p15 -> p20 [label="nanoporeTrim"];
+
+p15 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p42 [label="nanopore_polishing_racon"];
+p15 -> p42 [label="nanoporeRacon"];
+
+p16 [shape=point,label="",fixedsize=true,width=0.1];
+p17 [label="nanopore_QC_run_nanoplot"];
+p16 -> p17 [label="prefix"];
+
+p18 [shape=point,label="",fixedsize=true,width=0.1];
+p20 [label="nanopore_trim_filter_reads"];
+p18 -> p20 [label="prefix"];
+
+p19 [shape=point,label="",fixedsize=true,width=0.1];
+p20 [label="nanopore_trim_filter_reads"];
+p19 -> p20 [label="cpu"];
+
+p20 [label="nanopore_trim_filter_reads"];
+p21 [shape=point];
+p20 -> p21 [label="nanoporePassTrimFastq"];
+
+p20 [label="nanopore_trim_filter_reads"];
+p35 [label="assembly_flye"];
+p20 -> p35 [label="nanoporePassMAPQ60Fastq"];
+
+p20 [label="nanopore_trim_filter_reads"];
+p22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p20 -> p22 [label="nanoporePassFastq"];
+
+p22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p72 [label="nanopore_mapping_reference"];
+p22 -> p72 [label="nanoporePassFastqVCReference"];
+
+p22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p75 [label="nanopore_mapping_denovo"];
+p22 -> p75 [label="nanoporePassFastqVCDenovo"];
+
+p23 [shape=point,label="",fixedsize=true,width=0.1];
+p25 [label="illumina_trim_bbduk"];
+p23 -> p25 [label="cpu"];
+
+p24 [shape=point,label="",fixedsize=true,width=0.1];
+p25 [label="illumina_trim_bbduk"];
+p24 -> p25 [label="prefix"];
+
+p25 [label="illumina_trim_bbduk"];
+p26 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p25 -> p26 [label="illuminaFirstTrim"];
+
+p25 [label="illumina_trim_bbduk"];
+p27 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p25 -> p27 [label="illuminaSecondTrim"];
+
+p26 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p49 [label="illumina_polishing_pilon"];
+p26 -> p49 [label="illuminaFirstTrimPilon"];
+
+p26 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p58 [label="illumina_mapping_reference"];
+p26 -> p58 [label="illuminaFirstTrimReference"];
+
+p26 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p61 [label="illumina_mapping_denovo"];
+p26 -> p61 [label="illuminaFirstTrimDenovo"];
+
+p26 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p30 [label="illumina_QC_run_fastqc"];
+p26 -> p30 [label="illuminaFirstTrimQCRun"];
+
+p27 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p49 [label="illumina_polishing_pilon"];
+p27 -> p49 [label="illuminaSecondTrimPilon"];
+
+p27 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p58 [label="illumina_mapping_reference"];
+p27 -> p58 [label="illuminaSecondTrimReference"];
+
+p27 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p61 [label="illumina_mapping_denovo"];
+p27 -> p61 [label="illuminaSecondTrimDenovo"];
+
+p27 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p30 [label="illumina_QC_run_fastqc"];
+p27 -> p30 [label="illuminaSecondTrimQCRun"];
+
+p28 [shape=point,label="",fixedsize=true,width=0.1];
+p30 [label="illumina_QC_run_fastqc"];
+p28 -> p30 [label="prefix"];
+
+p29 [shape=point,label="",fixedsize=true,width=0.1];
+p30 [label="illumina_QC_run_fastqc"];
+p29 -> p30 [label="cpu"];
+
+p31 [shape=point,label="",fixedsize=true,width=0.1];
+p35 [label="assembly_flye"];
+p31 -> p35 [label="prefix"];
+
+p32 [shape=point,label="",fixedsize=true,width=0.1];
+p35 [label="assembly_flye"];
+p32 -> p35 [label="cpu"];
+
+p33 [shape=point,label="",fixedsize=true,width=0.1];
+p35 [label="assembly_flye"];
+p33 -> p35 [label="gpu"];
+
+p34 [shape=point,label="",fixedsize=true,width=0.1];
+p35 [label="assembly_flye"];
+p34 -> p35 [label="genome_size"];
+
+p35 [label="assembly_flye"];
+p38 [label="filter_structure"];
+p35 -> p38 [label="nanoporeContigs"];
+
+p36 [shape=point,label="",fixedsize=true,width=0.1];
+p38 [label="filter_structure"];
+p36 -> p38 [label="cpu"];
+
+p37 [shape=point,label="",fixedsize=true,width=0.1];
+p38 [label="filter_structure"];
+p37 -> p38 [label="prefix"];
+
+p38 [label="filter_structure"];
+p42 [label="nanopore_polishing_racon"];
+p38 -> p42 [label="targetGenome"];
+
+p39 [shape=point,label="",fixedsize=true,width=0.1];
+p42 [label="nanopore_polishing_racon"];
+p39 -> p42 [label="cpu"];
+
+p40 [shape=point,label="",fixedsize=true,width=0.1];
+p42 [label="nanopore_polishing_racon"];
+p40 -> p42 [label="gpu"];
+
+p41 [shape=point,label="",fixedsize=true,width=0.1];
+p42 [label="nanopore_polishing_racon"];
+p41 -> p42 [label="prefix"];
+
+p42 [label="nanopore_polishing_racon"];
+p46 [label="nanopore_polishing_medaka"];
+p42 -> p46 [label="targetGenomeNanoporeRaconPolished"];
+
+p42 [label="nanopore_polishing_racon"];
+p46 [label="nanopore_polishing_medaka"];
+p42 -> p46 [label="nanoporePassFastqTrimMedaka"];
+
+p43 [shape=point,label="",fixedsize=true,width=0.1];
+p46 [label="nanopore_polishing_medaka"];
+p43 -> p46 [label="cpu"];
+
+p44 [shape=point,label="",fixedsize=true,width=0.1];
+p46 [label="nanopore_polishing_medaka"];
+p44 -> p46 [label="type"];
+
+p45 [shape=point,label="",fixedsize=true,width=0.1];
+p46 [label="nanopore_polishing_medaka"];
+p45 -> p46 [label="prefix"];
+
+p46 [label="nanopore_polishing_medaka"];
+p49 [label="illumina_polishing_pilon"];
+p46 -> p49 [label="targetGenomeNanoporeRaconMedakaPolished"];
+
+p47 [shape=point,label="",fixedsize=true,width=0.1];
+p49 [label="illumina_polishing_pilon"];
+p47 -> p49 [label="cpu"];
+
+p48 [shape=point,label="",fixedsize=true,width=0.1];
+p49 [label="illumina_polishing_pilon"];
+p48 -> p49 [label="prefix"];
+
+p49 [label="illumina_polishing_pilon"];
+p50 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p49 -> p50 [label="targetGenomeNanoporeRaconMedakaIlluminaPilonPolished"];
+
+p50 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p61 [label="illumina_mapping_denovo"];
+p50 -> p61 [label="denovoIlluminaMapping"];
+
+p50 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p68 [label="illumina_VC_denovo"];
+p50 -> p68 [label="denovoIlluminaVC"];
+
+p50 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p75 [label="nanopore_mapping_denovo"];
+p50 -> p75 [label="denovoNanoporeMapping"];
+
+p50 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p52 [shape=point];
+p50 -> p52 [label="denovoNanoporeVC"];
+
+p50 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p51 [shape=point];
+p50 -> p51 [label="QCIlluminaTargetGenome"];
+
+p50 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="into"];
+p55 [label="genome_annotation"];
+p50 -> p55 [label="AnnotationPolishedGenome"];
+
+p53 [shape=point,label="",fixedsize=true,width=0.1];
+p55 [label="genome_annotation"];
+p53 -> p55 [label="cpu"];
+
+p54 [shape=point,label="",fixedsize=true,width=0.1];
+p55 [label="genome_annotation"];
+p54 -> p55 [label="prefix"];
+
+p56 [shape=point,label="",fixedsize=true,width=0.1];
+p58 [label="illumina_mapping_reference"];
+p56 -> p58 [label="cpu"];
+
+p57 [shape=point,label="",fixedsize=true,width=0.1];
+p58 [label="illumina_mapping_reference"];
+p57 -> p58 [label="prefix"];
+
+p58 [label="illumina_mapping_reference"];
+p64 [label="illumina_VC_reference"];
+p58 -> p64 [label="illuminaMappingReference"];
+
+p59 [shape=point,label="",fixedsize=true,width=0.1];
+p61 [label="illumina_mapping_denovo"];
+p59 -> p61 [label="cpu"];
+
+p60 [shape=point,label="",fixedsize=true,width=0.1];
+p61 [label="illumina_mapping_denovo"];
+p60 -> p61 [label="prefix"];
+
+p61 [label="illumina_mapping_denovo"];
+p68 [label="illumina_VC_denovo"];
+p61 -> p68 [label="illuminaMappingDenovoVC"];
+
+p62 [shape=point,label="",fixedsize=true,width=0.1];
+p64 [label="illumina_VC_reference"];
+p62 -> p64 [label="cpu"];
+
+p63 [shape=point,label="",fixedsize=true,width=0.1];
+p64 [label="illumina_VC_reference"];
+p63 -> p64 [label="prefix"];
+
+p64 [label="illumina_VC_reference"];
+p65 [shape=point];
+p64 -> p65 [label="illuminaReferenceVCVCF"];
+
+p66 [shape=point,label="",fixedsize=true,width=0.1];
+p68 [label="illumina_VC_denovo"];
+p66 -> p68 [label="cpu"];
+
+p67 [shape=point,label="",fixedsize=true,width=0.1];
+p68 [label="illumina_VC_denovo"];
+p67 -> p68 [label="prefix"];
+
+p68 [label="illumina_VC_denovo"];
+p69 [shape=point];
+p68 -> p69 [label="illuminaDenovoVCVCF"];
+
+p70 [shape=point,label="",fixedsize=true,width=0.1];
+p72 [label="nanopore_mapping_reference"];
+p70 -> p72 [label="cpu"];
+
+p71 [shape=point,label="",fixedsize=true,width=0.1];
+p72 [label="nanopore_mapping_reference"];
+p71 -> p72 [label="prefix"];
+
+p72 [label="nanopore_mapping_reference"];
+p78 [label="nanopore_VC_reference"];
+p72 -> p78 [label="nanoporeMappingReference"];
+
+p73 [shape=point,label="",fixedsize=true,width=0.1];
+p75 [label="nanopore_mapping_denovo"];
+p73 -> p75 [label="cpu"];
+
+p74 [shape=point,label="",fixedsize=true,width=0.1];
+p75 [label="nanopore_mapping_denovo"];
+p74 -> p75 [label="prefix"];
+
+p75 [label="nanopore_mapping_denovo"];
+p82 [label="nanopore_VC_denovo"];
+p75 -> p82 [label="nanoporeMappingDenovoVC"];
+
+p76 [shape=point,label="",fixedsize=true,width=0.1];
+p78 [label="nanopore_VC_reference"];
+p76 -> p78 [label="cpu"];
+
+p77 [shape=point,label="",fixedsize=true,width=0.1];
+p78 [label="nanopore_VC_reference"];
+p77 -> p78 [label="prefix"];
+
+p78 [label="nanopore_VC_reference"];
+p79 [shape=point];
+p78 -> p79 [label="nanoporeReferenceVCVCF"];
+
+p80 [shape=point,label="",fixedsize=true,width=0.1];
+p82 [label="nanopore_VC_denovo"];
+p80 -> p82 [label="cpu"];
+
+p81 [shape=point,label="",fixedsize=true,width=0.1];
+p82 [label="nanopore_VC_denovo"];
+p81 -> p82 [label="prefix"];
+
+p82 [label="nanopore_VC_denovo"];
+p83 [shape=point];
+p82 -> p83 [label="nanoporeDenovoVCVCF"];
+
+}
