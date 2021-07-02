@@ -547,7 +547,7 @@ process nanopore_VC_reference{
 
 	script:
 		"""
-		sniffles -t $cpu -m $nanopore_mapping_reference -v ${prefix}_nanopore_SV_reference.vcf -s 2 -q 30 --report_seq -l 10 --cluster --report_read_strands
+		sniffles -t $cpu -m $nanopore_mapping_reference -v ${prefix}_nanopore_SV_reference.vcf -s 2 -q 30 --report_seq -l 10 --cluster --report_read_strands --genotype
 		"""
 }
 
@@ -561,7 +561,7 @@ process nanopore_VC_denovo{
 		file "${prefix}_nanopore_SV_denovo.vcf" into nanoporeDenovoVCVCF
 	script:
 		"""
-		sniffles -t $cpu -m $nanopore_mapping_denovo -v ${prefix}_nanopore_SV_denovo.vcf -s 2 -q 30 --report_seq -l 10 --cluster --report_read_strands
+		sniffles -t $cpu -m $nanopore_mapping_denovo -v ${prefix}_nanopore_SV_denovo.vcf -s 2 -q 30 --report_seq -l 10 --cluster --report_read_strands --genotype
 		"""
 }
 
