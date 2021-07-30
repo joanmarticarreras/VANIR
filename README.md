@@ -123,3 +123,7 @@ sudo singularity shell -B <BIND-PATH-DATA> --nv --writable VANIR
 nextflow run nextflow/main.nf OPTIONS 
 ```
 Option `-B` or bind, can be used as many times needed, specifying different paths for data to be mounted in specific locations in the Singularity container. Option `--nv` is mandatory for GPU computing, and `--writable` options guarantees at this first release of the pipeline to write within the image. Later results can be exported.
+
+## Manuscript data
+
+Results and information regarding the publication of VANIR can be found in the `manuscript-data/` folder.
