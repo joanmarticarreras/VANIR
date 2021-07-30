@@ -1,0 +1,218 @@
+<!doctype html>
+<!--
+  ~ Copyright 2013-2019, Centre for Genomic Regulation (CRG)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script type="text/javascript">
+var prot = (("https:" == document.location.protocol) ? "https://" : "http://");
+document.write(unescape("%3Cscript src='" + prot + "code.jquery.com/jquery-latest.min.js' type='text/javascript' %3E%3C/script%3E"));
+document.write(unescape("%3Cscript src='" + prot + "d3js.org/d3.v3.min.js' charset='utf-8' type='text/javascript' %3E%3C/script%3E"));
+document.write(unescape("%3Cscript src='" + prot + "cdn.rawgit.com/nextflow-io/d3-timeline/82622c4cc35bac7283b3a317826b0709ac1ae476/src/d3-timeline.js' type='text/javascript' %3E%3C/script%3E"));
+</script>
+<style type="text/css">
+* {
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+.axis path,
+.axis line {
+fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font-size: 10px;
+}
+
+div#timeline g text {
+  font-size: 13px;
+}
+
+text.timeline-label {
+  font-size: 13px;
+}
+
+#timeline2 .axis {
+  transform: translate(0px,30px);
+  -ms-transform: translate(0px,30px); /* IE 9 */
+  -webkit-transform: translate(0px,30px); /* Safari and Chrome */
+  -o-transform: translate(0px,30px); /* Opera */
+  -moz-transform: translate(0px,30px); /* Firefox */
+}
+
+.coloredDiv {
+  height:20px; width:20px; float:left;
+}
+
+#footer {
+  padding-top: 3em; color: #bfbfbf; font-size: 13px;
+}
+
+#footer a:visited {
+  color: #bfbfbf;
+  text-decoration: underline;
+}
+</style>
+<script type="text/javascript">
+var handler=null;
+// see https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c
+var colors = d3.scale.category20c().domain(d3.range(0,20)).range()
+
+function c0(index) { return "#9c9c9c"; }
+function c1(index) { return "#bdbdbd"; }
+function c2(index) { return colors[index % 16]; } // <-- note: uses only the first 16 colors
+
+var elapsed="49m 26s"
+var beginningMillis=1623848620998;
+var endingMillis=1623851586902;
+var data=[
+{"label": "genbank_decompose (1)", "times": [{"starting_time": 1623848621694, "ending_time": 1623848621786, "color":c1(0)}, {"starting_time": 1623848621786, "ending_time": 1623848621913, "color":c2(0), "label": "790ms \/ 0"}, {"starting_time": 1623848621913, "ending_time": 1623848622484, "color":c1(0)}]},
+{"label": "nanopore_basecalling (1)", "times": [{"starting_time": 1623848621708, "ending_time": 1623848621792, "color":c1(1)}, {"starting_time": 1623848621792, "ending_time": 1623849368543, "color":c2(1), "label": "12m 27s \/ 1.3 GB"}, {"starting_time": 1623849368543, "ending_time": 1623849368937, "color":c1(1)}]},
+{"label": "illumina_trim_bbduk (1)", "times": [{"starting_time": 1623848621717, "ending_time": 1623848621796, "color":c1(2)}, {"starting_time": 1623848621796, "ending_time": 1623848635715, "color":c2(2), "label": "14.4s \/ 2.8 GB"}, {"starting_time": 1623848635715, "ending_time": 1623848636158, "color":c1(2)}]},
+{"label": "illumina_QC_run_fastqc (1)", "times": [{"starting_time": 1623848636183, "ending_time": 1623848636259, "color":c1(3)}, {"starting_time": 1623848636259, "ending_time": 1623848657662, "color":c2(3), "label": "22s \/ 2.2 GB"}, {"starting_time": 1623848657662, "ending_time": 1623848658140, "color":c1(3)}]},
+{"label": "illumina_mapping_reference (1)", "times": [{"starting_time": 1623848636197, "ending_time": 1623848636264, "color":c1(4)}, {"starting_time": 1623848636264, "ending_time": 1623848667659, "color":c2(4), "label": "31.9s \/ 3.5 GB"}, {"starting_time": 1623848667659, "ending_time": 1623848668099, "color":c1(4)}]},
+{"label": "illumina_VC_reference (1)", "times": [{"starting_time": 1623848668115, "ending_time": 1623848668199, "color":c1(5)}, {"starting_time": 1623848668199, "ending_time": 1623849117169, "color":c2(5), "label": "7m 33s \/ 1.5 GB"}, {"starting_time": 1623849117169, "ending_time": 1623849121036, "color":c1(5)}]},
+{"label": "nanopore_QC_run_nanoplot (1)", "times": [{"starting_time": 1623849368955, "ending_time": 1623849369037, "color":c1(6)}, {"starting_time": 1623849369037, "ending_time": 1623849621582, "color":c2(6), "label": "4m 13s \/ 454.8 MB"}, {"starting_time": 1623849621582, "ending_time": 1623849622053, "color":c1(6)}]},
+{"label": "nanopore_trim_filter_reads (1)", "times": [{"starting_time": 1623849368973, "ending_time": 1623849369042, "color":c1(7)}, {"starting_time": 1623849369042, "ending_time": 1623849454983, "color":c2(7), "label": "1m 26s \/ 1.4 GB"}, {"starting_time": 1623849454983, "ending_time": 1623849455397, "color":c1(7)}]},
+{"label": "nanopore_mapping_reference (1)", "times": [{"starting_time": 1623849455432, "ending_time": 1623849455498, "color":c1(8)}, {"starting_time": 1623849455498, "ending_time": 1623849579636, "color":c2(8), "label": "2m 5s \/ 41 GB"}, {"starting_time": 1623849579636, "ending_time": 1623849580137, "color":c1(8)}]},
+{"label": "assembly_flye (1)", "times": [{"starting_time": 1623849455442, "ending_time": 1623849455501, "color":c1(9)}, {"starting_time": 1623849455501, "ending_time": 1623850875557, "color":c2(9), "label": "23m 41s \/ 16.5 GB"}, {"starting_time": 1623850875557, "ending_time": 1623850876226, "color":c1(9)}]},
+{"label": "nanopore_VC_reference (1)", "times": [{"starting_time": 1623849580169, "ending_time": 1623849580237, "color":c1(10)}, {"starting_time": 1623849580237, "ending_time": 1623850120165, "color":c2(10), "label": "9m \/ 40.2 MB"}, {"starting_time": 1623850120165, "ending_time": 1623850120602, "color":c1(10)}]},
+{"label": "filter_structure (1)", "times": [{"starting_time": 1623850876249, "ending_time": 1623850876326, "color":c1(11)}, {"starting_time": 1623850876326, "ending_time": 1623850882791, "color":c2(11), "label": "17s \/ 136 MB"}, {"starting_time": 1623850882791, "ending_time": 1623850893267, "color":c1(11)}]},
+{"label": "nanopore_polishing_racon (1)", "times": [{"starting_time": 1623850893286, "ending_time": 1623850893367, "color":c1(12)}, {"starting_time": 1623850893367, "ending_time": 1623850909910, "color":c2(12), "label": "17.1s \/ 7.2 GB"}, {"starting_time": 1623850909910, "ending_time": 1623850910349, "color":c1(12)}]},
+{"label": "nanopore_polishing_medaka (1)", "times": [{"starting_time": 1623850910366, "ending_time": 1623850910450, "color":c1(13)}, {"starting_time": 1623850910450, "ending_time": 1623850957082, "color":c2(13), "label": "47.4s \/ 13.4 GB"}, {"starting_time": 1623850957082, "ending_time": 1623850957746, "color":c1(13)}]},
+{"label": "illumina_polishing_pilon (1)", "times": [{"starting_time": 1623850957764, "ending_time": 1623850957847, "color":c1(14)}, {"starting_time": 1623850957847, "ending_time": 1623851120309, "color":c2(14), "label": "2m 43s \/ 16.2 GB"}, {"starting_time": 1623851120309, "ending_time": 1623851120761, "color":c1(14)}]},
+{"label": "nanopore_mapping_denovo (1)", "times": [{"starting_time": 1623851120794, "ending_time": 1623851120861, "color":c1(15)}, {"starting_time": 1623851120861, "ending_time": 1623851234346, "color":c2(15), "label": "1m 54s \/ 39.3 GB"}, {"starting_time": 1623851234346, "ending_time": 1623851234893, "color":c1(15)}]},
+{"label": "genome_annotation (1)", "times": [{"starting_time": 1623851120803, "ending_time": 1623851120863, "color":c1(16)}, {"starting_time": 1623851120863, "ending_time": 1623851123486, "color":c2(16), "label": "19.7s \/ 118.6 MB"}, {"starting_time": 1623851123486, "ending_time": 1623851140538, "color":c1(16)}]},
+{"label": "illumina_mapping_denovo (1)", "times": [{"starting_time": 1623851120809, "ending_time": 1623851120866, "color":c1(17)}, {"starting_time": 1623851120866, "ending_time": 1623851234590, "color":c2(17), "label": "1m 54s \/ 3.5 GB"}, {"starting_time": 1623851234590, "ending_time": 1623851235077, "color":c1(17)}]},
+{"label": "nanopore_VC_denovo (1)", "times": [{"starting_time": 1623851234906, "ending_time": 1623851234994, "color":c1(18)}, {"starting_time": 1623851234994, "ending_time": 1623851580492, "color":c2(18), "label": "5m 46s \/ 35.7 MB"}, {"starting_time": 1623851580492, "ending_time": 1623851580948, "color":c1(18)}]},
+{"label": "illumina_VC_denovo (1)", "times": [{"starting_time": 1623851235090, "ending_time": 1623851235177, "color":c1(19)}, {"starting_time": 1623851235177, "ending_time": 1623851564053, "color":c2(19), "label": "5m 51s \/ 1.5 GB"}, {"starting_time": 1623851564053, "ending_time": 1623851585983, "color":c1(19)}]}
+]
+
+
+function getTickFormat() {
+  var MIN = 1000 * 60
+  var HOUR = MIN * 60
+  var DAY = HOUR * 24
+  var delta = (endingMillis - beginningMillis)
+
+  if( delta < 2 * MIN ) {
+    return {
+      format: d3.time.format("%S"),
+      tickTime: d3.time.seconds,
+      tickInterval: 5,
+      tickSize: 6
+    }
+  }
+
+  if( delta < 2 * HOUR ) {
+    return {
+      format: d3.time.format("%M"),
+      tickTime: d3.time.minutes,
+      tickInterval: 5,
+      tickSize: 6
+    }
+  }
+
+  if( delta < 2 * DAY ) {
+    return {
+      format: d3.time.format("%H:%M"),
+      tickTime: d3.time.hours,
+      tickInterval: 1,
+      tickSize: 6
+    }
+  }
+
+  if( delta <= 7 * DAY ) {
+    return {
+      format: d3.time.format("%b %e %H:%M"),
+      tickTime: d3.time.hours,
+      tickInterval: 6,
+      tickSize: 6
+    }
+  }
+
+  return {
+    format: d3.time.format("%b %e"),
+    tickTime: d3.time.days,
+    tickInterval: 1,
+    tickSize: 6
+  }
+}
+
+function getLabelMargin(scale) {
+    $('<span class="labelSpan" style="display: none"></span>').appendTo('body');
+
+    var labelMargin = 0
+    $.each(data, function (key, value) {
+      labelMargin = Math.max(labelMargin, $('.labelSpan').html(value.label).width());
+    });
+
+    $('.labelSpan').remove();
+
+    return (labelMargin * scale);
+}
+
+function render() {
+  handler=null;
+  $("#timeline").empty()
+  $('#label_elapsed').text(elapsed)
+  $('#label_launch').text( d3.time.format('%d %b %Y %H:%M')(new Date(beginningMillis)) )
+
+  var width = $(window).width();
+  var chart = d3.timeline()
+    .stack() // toggles graph stacking
+    .margin({left:getLabelMargin(0.85), right:100, top:0, bottom:0})
+    .tickFormat( getTickFormat() )
+    .rowSeperators('#f5f5f5')
+    .showTimeAxisTick()
+    ;
+  var svg = d3.select("#timeline").append("svg").attr("width", width).datum(data).call(chart);
+}
+
+function hrz() {
+if( handler != null ) clearTimeout(handler)
+  handler = setTimeout(render, 150);
+}
+
+$(document).ready(render)
+$(window).resize(hrz); // resize the applet on window resize
+</script>
+</head>
+
+<body>
+<div>
+  <h3>Processes execution timeline</h3>
+  <p>
+    Launch time: <span id='label_launch'> </span><br>
+    Elapsed time: <span id='label_elapsed'> </span><br>
+    Legend: job wall time / memory usage (RAM) <span id='label_legend'> </span>
+  </p>
+  <div id="timeline"></div>
+</div>
+
+<div id='footer'>
+  Created with Nextflow -- <a href='http://www.nextflow.io' target='_blank'>http://nextflow.io</a>
+</div>
+
+<script type="text/javascript">
+var prot = (("https:" == document.location.protocol) ? "https://" : "http://");
+document.write(unescape("%3Clink href='" + prot + "fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css' %3E%3C/link%3E"));
+</script>
+</body>
+</html>

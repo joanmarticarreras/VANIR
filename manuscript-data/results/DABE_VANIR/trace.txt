@@ -1,0 +1,21 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	58/79bd43	63219	genbank_decompose (1)	COMPLETED	0	2021-06-16 16:18:48.430	842ms	130ms	70.7%	0	0	956.1 KB	381.3 KB
+3	61/7f1d10	63226	illumina_trim_bbduk (1)	COMPLETED	0	2021-06-16 16:18:48.447	20.1s	19.5s	2030.4%	3.2 GB	78.7 GB	3.7 GB	3.7 GB
+5	9e/83c8e2	66486	illumina_QC_run_fastqc (1)	COMPLETED	0	2021-06-16 16:19:08.606	27s	26.4s	230.8%	3.6 GB	35.2 GB	463.6 MB	3.8 MB
+4	a4/8a154b	66477	illumina_mapping_reference (1)	COMPLETED	0	2021-06-16 16:19:08.590	49.6s	49.1s	2174.9%	4.7 GB	76.6 GB	2.6 GB	2.5 GB
+6	d9/f976f3	69554	illumina_VC_reference (1)	COMPLETED	0	2021-06-16 16:19:58.234	6m 2s	5m 48s	339.9%	1.9 GB	73.2 GB	3.1 GB	1.4 GB
+2	d5/4af9bd	63239	nanopore_basecalling (1)	COMPLETED	0	2021-06-16 16:18:48.456	8m 12s	8m 12s	210.7%	1.1 GB	17 GB	8.2 GB	3.3 GB
+8	e6/1f699e	90375	nanopore_trim_filter_reads (1)	COMPLETED	0	2021-06-16 16:27:00.716	1m 19s	1m 18s	445.1%	3.3 GB	10.8 GB	5.6 GB	4.2 GB
+7	33/e13462	90369	nanopore_QC_run_nanoplot (1)	COMPLETED	0	2021-06-16 16:27:00.706	2m 44s	2m 43s	100.6%	363.2 MB	8.7 GB	1.3 GB	77.2 KB
+10	d1/652b4e	93717	nanopore_mapping_reference (1)	COMPLETED	0	2021-06-16 16:28:19.374	1m 56s	1m 56s	7680.5%	43.4 GB	77.5 GB	2.1 GB	2.2 GB
+11	81/5d3e64	2107	nanopore_VC_reference (1)	COMPLETED	0	2021-06-16 16:30:15.560	12m 31s	12m 31s	8043.1%	39.4 MB	6.7 GB	571.9 MB	900.6 KB
+9	83/e3a5d6	93711	assembly_flye (1)	COMPLETED	0	2021-06-16 16:28:19.366	26m 42s	26m 42s	952.3%	13.1 GB	21.6 GB	20.2 GB	14.6 GB
+12	c3/1f32d1	64249	filter_structure (1)	COMPLETED	0	2021-06-16 16:55:01.750	7.6s	6.8s	413.8%	333.4 MB	4.8 GB	52.2 MB	20.5 MB
+13	f0/c7209f	65418	nanopore_polishing_racon (1)	COMPLETED	0	2021-06-16 16:55:09.373	15s	14.5s	850.6%	6.8 GB	47.4 GB	2 GB	680.8 MB
+14	fc/95cdd4	66477	nanopore_polishing_medaka (1)	COMPLETED	0	2021-06-16 16:55:24.408	1m 12s	58.2s	1469.4%	8.9 GB	92.1 GB	4.8 GB	2.9 GB
+15	7a/14761f	72055	illumina_polishing_pilon (1)	COMPLETED	0	2021-06-16 16:56:36.499	3m 8s	3m 8s	754.4%	23.4 GB	76.8 GB	4.6 GB	4.4 GB
+17	71/2c98bc	77135	genome_annotation (1)	COMPLETED	0	2021-06-16 16:59:44.687	21.1s	2.9s	811.5%	118.5 MB	9.1 GB	39.1 MB	18.7 MB
+18	09/401464	77146	nanopore_mapping_denovo (1)	COMPLETED	0	2021-06-16 16:59:44.701	1m 54s	1m 54s	7662.8%	42.4 GB	77.2 GB	2.5 GB	2.8 GB
+16	02/56f40a	77141	illumina_mapping_denovo (1)	COMPLETED	0	2021-06-16 16:59:44.695	2m 3s	2m 2s	537.9%	4.7 GB	79 GB	2.6 GB	2.5 GB
+20	4c/6ff43f	85708	illumina_VC_denovo (1)	COMPLETED	0	2021-06-16 17:01:47.509	6m 28s	5m 51s	270.6%	2 GB	79.4 GB	3.2 GB	1.4 GB
+19	aa/dcb94d	84861	nanopore_VC_denovo (1)	COMPLETED	0	2021-06-16 17:01:38.755	6m 44s	6m 44s	9153.7%	57.8 MB	6.8 GB	723.2 MB	1.4 MB

@@ -1,0 +1,60 @@
+##fileformat=VCFv4.0
+##fileDate=20210616
+##source=lofreq call -f SOMA_VANIR.fasta --call-indels -b dynamic -s -a 0.001 --use-orphan --no-default-filter -r SOMA_VANIR_medaka_pilon:1-914 -o /tmp/lofreq2_call_parallelBLET5o/0.vcf.gz SOMA_VANIR_illumina_vs_denovo.sort.vit.alnqual.bam 
+##reference=SOMA_VANIR.fasta
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw Depth">
+##INFO=<ID=AF,Number=1,Type=Float,Description="Allele Frequency">
+##INFO=<ID=SB,Number=1,Type=Integer,Description="Phred-scaled strand bias at this position">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="Counts for ref-forward bases, ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=CONSVAR,Number=0,Type=Flag,Description="Indicates that the variant is a consensus variant (as opposed to a low frequency variant).">
+##INFO=<ID=HRUN,Number=1,Type=Integer,Description="Homopolymer length to the right of report indel position">
+##FILTER=<ID=min_snvqual_53,Description="Minimum SNV Quality (Phred) 53">
+##FILTER=<ID=min_indelqual_33,Description="Minimum Indel Quality (Phred) 33">
+##FILTER=<ID=min_dp_10,Description="Minimum Coverage 10">
+##FILTER=<ID=sb_fdr,Description="Strand-Bias Multiple Testing Correction: fdr corr. pvalue > 0.001000">
+##FILTER=<ID=min_snvqual_87,Description="Minimum SNV Quality (Phred) 87">
+##FILTER=<ID=min_indelqual_62,Description="Minimum Indel Quality (Phred) 62">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+SOMA_VANIR_medaka_pilon	851	.	C	A	458	PASS	DP=18;AF=1.000000;SB=0;DP4=0,0,11,7
+SOMA_VANIR_medaka_pilon	13286	.	C	T	5979	PASS	DP=486;AF=0.934156;SB=0;DP4=2,2,191,263
+SOMA_VANIR_medaka_pilon	13373	.	A	G	1298	PASS	DP=500;AF=0.990000;SB=3;DP4=1,0,227,268
+SOMA_VANIR_medaka_pilon	13492	.	T	C	392	PASS	DP=379;AF=0.994723;SB=0;DP4=0,0,195,182
+SOMA_VANIR_medaka_pilon	13513	.	C	T	781	PASS	DP=332;AF=0.996988;SB=0;DP4=0,0,173,158
+SOMA_VANIR_medaka_pilon	13681	.	G	C	602	PASS	DP=396;AF=0.987374;SB=0;DP4=0,0,232,159
+SOMA_VANIR_medaka_pilon	14698	.	A	G	467	PASS	DP=22;AF=1.000000;SB=0;DP4=0,0,19,3
+SOMA_VANIR_medaka_pilon	14817	.	G	A	1309	PASS	DP=100;AF=0.990000;SB=0;DP4=0,0,17,82
+SOMA_VANIR_medaka_pilon	14830	.	G	C	1327	PASS	DP=100;AF=0.990000;SB=0;DP4=0,1,17,82
+SOMA_VANIR_medaka_pilon	14898	.	C	T	154	PASS	DP=184;AF=0.994565;SB=0;DP4=0,0,124,59
+SOMA_VANIR_medaka_pilon	14991	.	C	T	145	PASS	DP=329;AF=0.996960;SB=0;DP4=0,0,172,156
+SOMA_VANIR_medaka_pilon	15000	.	G	A	867	PASS	DP=363;AF=0.986226;SB=0;DP4=0,0,193,165
+SOMA_VANIR_medaka_pilon	15421	.	C	T	950	PASS	DP=368;AF=0.983696;SB=0;DP4=0,1,164,198
+SOMA_VANIR_medaka_pilon	15427	.	A	G	942	PASS	DP=362;AF=0.994475;SB=0;DP4=0,0,156,204
+SOMA_VANIR_medaka_pilon	15925	.	G	T	120	PASS	DP=221;AF=0.990950;SB=0;DP4=1,1,104,115
+SOMA_VANIR_medaka_pilon	15930	.	G	A	379	PASS	DP=227;AF=0.991189;SB=0;DP4=0,0,105,120
+SOMA_VANIR_medaka_pilon	16210	.	G	A	1702	PASS	DP=493;AF=0.993915;SB=3;DP4=0,1,274,216
+SOMA_VANIR_medaka_pilon	16487	.	G	A	276	PASS	DP=21;AF=0.904762;SB=0;DP4=0,0,8,11
+SOMA_VANIR_medaka_pilon	16490	.	G	A	178	PASS	DP=17;AF=1.000000;SB=0;DP4=0,0,8,9
+SOMA_VANIR_medaka_pilon	17645	.	T	C	444	PASS	DP=468;AF=0.993590;SB=0;DP4=0,0,235,230
+SOMA_VANIR_medaka_pilon	17789	.	C	T	2069	PASS	DP=448;AF=0.993304;SB=0;DP4=0,0,211,234
+SOMA_VANIR_medaka_pilon	43048	.	A	G	5300	PASS	DP=330;AF=0.972727;SB=0;DP4=0,0,163,158
+SOMA_VANIR_medaka_pilon	43244	.	A	G	172	PASS	DP=366;AF=0.994536;SB=0;DP4=0,0,177,187
+SOMA_VANIR_medaka_pilon	43310	.	T	C	97	PASS	DP=302;AF=0.993378;SB=0;DP4=0,0,145,155
+SOMA_VANIR_medaka_pilon	51142	.	G	A	711	PASS	DP=20;AF=1.000000;SB=0;DP4=0,0,8,12
+SOMA_VANIR_medaka_pilon	51199	.	A	G	238	PASS	DP=19;AF=1.000000;SB=0;DP4=0,0,17,2
+SOMA_VANIR_medaka_pilon	94636	.	T	C	96	PASS	DP=16;AF=1.000000;SB=0;DP4=0,0,8,8
+SOMA_VANIR_medaka_pilon	107411	.	G	C	380	PASS	DP=72;AF=1.000000;SB=0;DP4=0,0,24,48
+SOMA_VANIR_medaka_pilon	107416	.	C	T	372	PASS	DP=72;AF=1.000000;SB=0;DP4=0,0,24,48
+SOMA_VANIR_medaka_pilon	108298	.	G	A	128	PASS	DP=65;AF=1.000000;SB=0;DP4=0,0,42,23
+SOMA_VANIR_medaka_pilon	108671	.	C	T	11892	PASS	DP=420;AF=0.992857;SB=0;DP4=0,0,256,161
+SOMA_VANIR_medaka_pilon	113155	.	C	T	573	PASS	DP=37;AF=1.000000;SB=0;DP4=0,0,21,16
+SOMA_VANIR_medaka_pilon	113161	.	G	A	434	PASS	DP=31;AF=1.000000;SB=0;DP4=0,0,20,11
+SOMA_VANIR_medaka_pilon	115200	.	C	T	686	PASS	DP=26;AF=1.000000;SB=0;DP4=0,0,16,10
+SOMA_VANIR_medaka_pilon	229231	.	T	G	411	PASS	DP=191;AF=0.973822;SB=0;DP4=5,0,172,14
+SOMA_VANIR_medaka_pilon	229235	.	G	A	507	PASS	DP=188;AF=1.000000;SB=0;DP4=0,0,174,14
+SOMA_VANIR_medaka_pilon	229285	.	T	G	709	PASS	DP=196;AF=0.979592;SB=5;DP4=0,4,69,123
+SOMA_VANIR_medaka_pilon	229286	.	T	G	729	PASS	DP=198;AF=0.979798;SB=5;DP4=2,1,68,126
+SOMA_VANIR_medaka_pilon	230075	.	T	C	2095	PASS	DP=142;AF=0.992958;SB=0;DP4=0,0,72,69
+SOMA_VANIR_medaka_pilon	230080	.	T	C	2160	PASS	DP=144;AF=1.000000;SB=0;DP4=0,0,73,71
+SOMA_VANIR_medaka_pilon	232776	.	T	G	6333	PASS	DP=324;AF=0.975309;SB=0;DP4=0,1,70,246
+SOMA_VANIR_medaka_pilon	232945	.	C	T	3973	PASS	DP=462;AF=0.963203;SB=0;DP4=0,0,308,137

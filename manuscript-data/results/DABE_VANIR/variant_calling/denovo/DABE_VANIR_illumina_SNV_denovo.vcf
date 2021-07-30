@@ -1,0 +1,26 @@
+##fileformat=VCFv4.0
+##fileDate=20210616
+##source=lofreq call -f DABE_VANIR.fasta --call-indels -b dynamic -s -a 0.001 --use-orphan --no-default-filter -r DABE_VANIR_medaka_pilon:1-856 -o /tmp/lofreq2_call_parallelq9aphn/0.vcf.gz DABE_VANIR_illumina_vs_denovo.sort.vit.alnqual.bam 
+##reference=DABE_VANIR.fasta
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw Depth">
+##INFO=<ID=AF,Number=1,Type=Float,Description="Allele Frequency">
+##INFO=<ID=SB,Number=1,Type=Integer,Description="Phred-scaled strand bias at this position">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="Counts for ref-forward bases, ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=CONSVAR,Number=0,Type=Flag,Description="Indicates that the variant is a consensus variant (as opposed to a low frequency variant).">
+##INFO=<ID=HRUN,Number=1,Type=Integer,Description="Homopolymer length to the right of report indel position">
+##FILTER=<ID=min_snvqual_64,Description="Minimum SNV Quality (Phred) 64">
+##FILTER=<ID=min_indelqual_43,Description="Minimum Indel Quality (Phred) 43">
+##FILTER=<ID=min_dp_10,Description="Minimum Coverage 10">
+##FILTER=<ID=sb_fdr,Description="Strand-Bias Multiple Testing Correction: fdr corr. pvalue > 0.001000">
+##FILTER=<ID=min_snvqual_88,Description="Minimum SNV Quality (Phred) 88">
+##FILTER=<ID=min_indelqual_66,Description="Minimum Indel Quality (Phred) 66">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+DABE_VANIR_medaka_pilon	75593	.	T	G	169	PASS	DP=17;AF=0.941176;SB=3;DP4=1,0,7,9
+DABE_VANIR_medaka_pilon	110610	.	T	A	95	PASS	DP=29;AF=0.586207;SB=4;DP4=0,1,12,5
+DABE_VANIR_medaka_pilon	158351	.	C	G	195	PASS	DP=41;AF=0.853659;SB=20;DP4=6,0,14,21
+DABE_VANIR_medaka_pilon	158387	.	G	C	3617	PASS	DP=290;AF=0.989655;SB=0;DP4=1,1,175,112
+DABE_VANIR_medaka_pilon	176040	.	A	G	260	PASS	DP=22;AF=1.000000;SB=0;DP4=0,0,4,18
+DABE_VANIR_medaka_pilon	176520	.	G	A	145	PASS	DP=137;AF=0.992701;SB=0;DP4=0,0,55,81
+DABE_VANIR_medaka_pilon	217802	.	G	C	757	PASS	DP=1081;AF=0.236818;SB=2;DP4=358,466,116,140
+DABE_VANIR_medaka_pilon	217849	.	T	C	194	PASS	DP=589;AF=0.264856;SB=1;DP4=165,263,63,93

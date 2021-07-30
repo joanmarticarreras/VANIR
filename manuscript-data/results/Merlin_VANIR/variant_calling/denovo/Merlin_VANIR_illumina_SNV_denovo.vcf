@@ -1,0 +1,78 @@
+##fileformat=VCFv4.0
+##fileDate=20210616
+##source=lofreq call -f Merlin_VANIR.fasta --call-indels -b dynamic -s -a 0.001 --use-orphan --no-default-filter -r Merlin_VANIR_medaka_pilon:1-920 -o /tmp/lofreq2_call_parallelFvz2oe/0.vcf.gz Merlin_VANIR_illumina_vs_denovo.sort.vit.alnqual.bam 
+##reference=Merlin_VANIR.fasta
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw Depth">
+##INFO=<ID=AF,Number=1,Type=Float,Description="Allele Frequency">
+##INFO=<ID=SB,Number=1,Type=Integer,Description="Phred-scaled strand bias at this position">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="Counts for ref-forward bases, ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=CONSVAR,Number=0,Type=Flag,Description="Indicates that the variant is a consensus variant (as opposed to a low frequency variant).">
+##INFO=<ID=HRUN,Number=1,Type=Integer,Description="Homopolymer length to the right of report indel position">
+##FILTER=<ID=min_snvqual_61,Description="Minimum SNV Quality (Phred) 61">
+##FILTER=<ID=min_indelqual_42,Description="Minimum Indel Quality (Phred) 42">
+##FILTER=<ID=min_dp_10,Description="Minimum Coverage 10">
+##FILTER=<ID=sb_fdr,Description="Strand-Bias Multiple Testing Correction: fdr corr. pvalue > 0.001000">
+##FILTER=<ID=min_snvqual_86,Description="Minimum SNV Quality (Phred) 86">
+##FILTER=<ID=min_indelqual_63,Description="Minimum Indel Quality (Phred) 63">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+Merlin_VANIR_medaka_pilon	591	.	G	C	114	PASS	DP=1081;AF=0.554117;SB=1;DP4=308,174,377,222
+Merlin_VANIR_medaka_pilon	2695	.	G	A	2206	PASS	DP=1774;AF=0.062007;SB=0;DP4=796,867,52,58
+Merlin_VANIR_medaka_pilon	4472	.	G	A	154	PASS	DP=2033;AF=0.007870;SB=12;DP4=630,1386,9,7
+Merlin_VANIR_medaka_pilon	4652	.	G	A	228	PASS	DP=1911;AF=0.013082;SB=20;DP4=930,955,19,6
+Merlin_VANIR_medaka_pilon	6093	.	G	T	207	PASS	DP=2751;AF=0.008361;SB=0;DP4=1118,1607,9,14
+Merlin_VANIR_medaka_pilon	6208	.	A	T	441	PASS	DP=2392;AF=0.017559;SB=1;DP4=1148,1199,19,23
+Merlin_VANIR_medaka_pilon	6798	.	G	A	198	PASS	DP=2296;AF=0.008711;SB=1;DP4=1129,1147,11,9
+Merlin_VANIR_medaka_pilon	7223	.	G	A	206	PASS	DP=1929;AF=0.009331;SB=3;DP4=827,1083,6,12
+Merlin_VANIR_medaka_pilon	7317	.	G	C	160	PASS	DP=2154;AF=0.007428;SB=6;DP4=1200,936,6,10
+Merlin_VANIR_medaka_pilon	8205	.	G	A	86	PASS	DP=2264;AF=0.007067;SB=4;DP4=1013,1235,5,11
+Merlin_VANIR_medaka_pilon	8207	.	G	A	114	PASS	DP=2215;AF=0.007675;SB=6;DP4=989,1208,5,12
+Merlin_VANIR_medaka_pilon	9855	.	G	A	99	PASS	DP=2548;AF=0.007064;SB=0;DP4=1284,1246,9,9
+Merlin_VANIR_medaka_pilon	10269	.	T	C	1162	PASS	DP=2727;AF=0.028603;SB=6;DP4=1324,1323,45,33
+Merlin_VANIR_medaka_pilon	10459	.	G	A	184	PASS	DP=2610;AF=0.008046;SB=0;DP4=1290,1298,10,11
+Merlin_VANIR_medaka_pilon	10940	.	C	T	399	PASS	DP=2285;AF=0.015755;SB=5;DP4=1103,1143,21,15
+Merlin_VANIR_medaka_pilon	10977	.	C	A	452	PASS	DP=2162;AF=0.018039;SB=0;DP4=958,1164,18,21
+Merlin_VANIR_medaka_pilon	11043	.	G	A	310	PASS	DP=2200;AF=0.011818;SB=4;DP4=1161,1013,11,15
+Merlin_VANIR_medaka_pilon	11080	.	C	T	387	PASS	DP=2086;AF=0.014861;SB=0;DP4=995,1059,15,16
+Merlin_VANIR_medaka_pilon	11140	.	C	T	414	PASS	DP=2219;AF=0.013970;SB=3;DP4=1065,1123,13,18
+Merlin_VANIR_medaka_pilon	11197	.	G	A	1524	PASS	DP=2124;AF=0.040960;SB=0;DP4=1039,998,43,44
+Merlin_VANIR_medaka_pilon	11244	.	C	T	411	PASS	DP=2069;AF=0.015950;SB=10;DP4=1058,977,12,21
+Merlin_VANIR_medaka_pilon	11522	.	A	C	246	PASS	DP=2001;AF=0.012994;SB=29;DP4=1015,959,5,21
+Merlin_VANIR_medaka_pilon	11525	.	G	T	227	PASS	DP=1970;AF=0.012183;SB=34;DP4=1033,913,4,20
+Merlin_VANIR_medaka_pilon	11537	.	C	T	417	PASS	DP=1919;AF=0.028661;SB=6;DP4=1009,853,25,30
+Merlin_VANIR_medaka_pilon	11540	.	G	T	1384	PASS	DP=1958;AF=0.063330;SB=0;DP4=1006,826,67,57
+Merlin_VANIR_medaka_pilon	11543	.	G	A	2210	PASS	DP=1915;AF=0.090339;SB=21;DP4=926,815,111,62
+Merlin_VANIR_medaka_pilon	11569	.	G	A	49314	PASS	DP=1831;AF=0.042054;SB=3;DP4=622,653,34,43
+Merlin_VANIR_medaka_pilon	11569	.	G	C	7477	PASS	DP=1831;AF=0.261060;SB=2;DP4=622,653,240,238
+Merlin_VANIR_medaka_pilon	11579	.	T	C	42370	PASS	DP=1814;AF=0.837376;SB=0;DP4=137,158,705,814
+Merlin_VANIR_medaka_pilon	11718	.	T	C	186	PASS	DP=1895;AF=0.010026;SB=1;DP4=997,877,9,10
+Merlin_VANIR_medaka_pilon	11890	.	C	T	2817	PASS	DP=2006;AF=0.069791;SB=11;DP4=812,1054,50,90
+Merlin_VANIR_medaka_pilon	11906	.	G	C	14403	PASS	DP=2006;AF=0.265204;SB=1;DP4=709,761,262,270
+Merlin_VANIR_medaka_pilon	11970	.	C	A	2356	PASS	DP=1687;AF=0.072318;SB=2;DP4=807,755,59,63
+Merlin_VANIR_medaka_pilon	12501	.	G	C	12167	PASS	DP=1933;AF=0.242111;SB=5;DP4=677,779,231,237
+Merlin_VANIR_medaka_pilon	12522	.	C	T	3213	PASS	DP=1934;AF=0.077042;SB=8;DP4=831,953,79,70
+Merlin_VANIR_medaka_pilon	12682	.	C	T	2657	PASS	DP=1680;AF=0.082738;SB=6;DP4=866,674,71,68
+Merlin_VANIR_medaka_pilon	12799	.	G	C	9969	PASS	DP=1712;AF=0.228972;SB=6;DP4=692,628,192,200
+Merlin_VANIR_medaka_pilon	13614	.	C	A	2051	PASS	DP=1775;AF=0.064225;SB=3;DP4=928,731,60,54
+Merlin_VANIR_medaka_pilon	13660	.	C	A	2154	PASS	DP=1754;AF=0.063284;SB=7;DP4=839,804,49,62
+Merlin_VANIR_medaka_pilon	14395	.	C	T	104	PASS	DP=1395;AF=0.011470;SB=22;DP4=729,649,14,2
+Merlin_VANIR_medaka_pilon	14486	.	C	T	96	PASS	DP=1523;AF=0.007879;SB=1;DP4=759,752,7,5
+Merlin_VANIR_medaka_pilon	14643	.	G	A	205	PASS	DP=1719;AF=0.011053;SB=0;DP4=872,828,10,9
+Merlin_VANIR_medaka_pilon	14669	.	C	T	2372	PASS	DP=1701;AF=0.069959;SB=10;DP4=809,771,71,48
+Merlin_VANIR_medaka_pilon	14902	.	G	C	246	PASS	DP=2122;AF=0.011310;SB=2;DP4=1004,1094,13,11
+Merlin_VANIR_medaka_pilon	15146	.	C	A	2185	PASS	DP=2003;AF=0.059411;SB=0;DP4=942,941,61,58
+Merlin_VANIR_medaka_pilon	16275	.	G	A	101	PASS	DP=2189;AF=0.006396;SB=0;DP4=1086,1089,7,7
+Merlin_VANIR_medaka_pilon	16877	.	G	C	245	PASS	DP=2368;AF=0.009713;SB=1;DP4=1398,943,15,8
+Merlin_VANIR_medaka_pilon	17715	.	C	T	2476	PASS	DP=2153;AF=0.059452;SB=9;DP4=1178,846,84,44
+Merlin_VANIR_medaka_pilon	30119	.	C	T	3167	PASS	DP=1130;AF=0.132743;SB=0;DP4=440,539,69,81
+Merlin_VANIR_medaka_pilon	40237	.	C	G	10609	PASS	DP=1107;AF=0.348690;SB=15;DP4=321,400,199,187
+Merlin_VANIR_medaka_pilon	43784	.	C	T	101	PASS	DP=1214;AF=0.009885;SB=5;DP4=603,598,4,8
+Merlin_VANIR_medaka_pilon	48834	.	G	A	983	PASS	DP=641;AF=0.082683;SB=1;DP4=347,240,33,20
+Merlin_VANIR_medaka_pilon	49060	.	G	C	843	PASS	DP=670;AF=0.065672;SB=25;DP4=294,332,31,13
+Merlin_VANIR_medaka_pilon	49209	.	G	A	1088	PASS	DP=695;AF=0.080576;SB=4;DP4=289,350,21,35
+Merlin_VANIR_medaka_pilon	49797	.	G	A	647	PASS	DP=836;AF=0.059809;SB=6;DP4=435,351,23,27
+Merlin_VANIR_medaka_pilon	49798	.	G	C	642	PASS	DP=841;AF=0.060642;SB=5;DP4=432,357,24,27
+Merlin_VANIR_medaka_pilon	103492	.	C	A	538	PASS	DP=646;AF=0.047988;SB=0;DP4=329,286,16,15
+Merlin_VANIR_medaka_pilon	109386	.	C	A	96	PASS	DP=1033;AF=0.012585;SB=25;DP4=629,387,13,0
+Merlin_VANIR_medaka_pilon	175763	.	A	T	3807	PASS	DP=1816;AF=0.099119;SB=1;DP4=812,824,87,93
+Merlin_VANIR_medaka_pilon	218623	.	G	C	716	PASS	DP=2538;AF=0.022459;SB=0;DP4=1240,1238,28,29
